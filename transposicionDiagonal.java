@@ -7,12 +7,14 @@ public class transposicionDiagonal {
     static String transpoDiagonal(String mensaje, int dim) {
         //Creamos la matriz donde meteremos el mensaje.
         char[][] matriz = new char[(int) (Math.ceil((double) mensaje.length() / (double) dim))][dim];
+        //asignamos valores
         asignar_valores(matriz, mensaje);
         return crear_cifrado(matriz);
     }
 
     static void asignar_valores(char[][] matriz, String mensaje) {
         int contador = 0;
+        //En el momento que hayamos recorrido todos los carácteres del mensaje, salimos del bucle.
         bucle:
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++, contador++) {
