@@ -13,7 +13,7 @@ public class raiz_cubica {
     }
 
     static double calcular_raiz(double retorno, double incremento, int numero) {
-        while (((retorno + incremento) * (retorno + incremento) * (retorno + incremento)) <= numero) {
+        while ((Math.pow((retorno + incremento), 3) <= numero)) {
             retorno += incremento;
         }
         return retorno;
