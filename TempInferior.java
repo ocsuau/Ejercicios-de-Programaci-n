@@ -9,23 +9,9 @@ public class TempInferior {
         if (cantidad <= 0) {
             return 0;
         }
-        String[] ars = stringAarray(valores, cantidad);
+        String[] ars = valores.split(" ");
         int[] valoresenteros = transformarArray(ars, cantidad);
         return cercanaCero(valoresenteros);
-    }
-
-    static String[] stringAarray(String valores, int cantidad) {
-        String[] ars = new String[cantidad];
-        Arrays.fill(ars, "");
-        int contador = 0;
-        for (int i = 0; i < valores.length(); i++) {
-            if (valores.charAt(i) == ' ') {
-                contador++;
-            } else {
-                ars[contador] += valores.charAt(i);
-            }
-        }
-        return ars;
     }
 
     static int[] transformarArray(String[] ars, int cantidad) {
