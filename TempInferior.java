@@ -6,19 +6,12 @@ import java.util.Scanner;
  */
 public class TempInferior {
     static int calcTempInf(String valores, int cantidad) {
-        if (comprobacionesPrevias(cantidad)) {
+        if (cantidad <= 0) {
             return 0;
         }
         String[] ars = stringAarray(valores, cantidad);
         int[] valoresenteros = transformarArray(ars, cantidad);
         return cercanaCero(valoresenteros);
-    }
-
-    static boolean comprobacionesPrevias(int cantidad) {
-        if (cantidad <= 0) {
-            return true;
-        }
-        return false;
     }
 
     static String[] stringAarray(String valores, int cantidad) {
@@ -81,11 +74,11 @@ public class TempInferior {
 
     static int cercanaCero(int[] valoresenteros) {
         int contenedor = valoresenteros[0];
-        int resta = pasarPositivo(0 - contenedor);
+        int resta = Math.abs(0 - contenedor);
         boolean contador = false;
         int resta2;
         for (int i = 1; i < valoresenteros.length; i++) {
-            resta2 = pasarPositivo(0 - valoresenteros[i]);
+            resta2 = Math.abs(0 - valoresenteros[i]);
             if (resta2 < resta) {
                 resta = resta2;
                 contenedor = valoresenteros[i];
@@ -100,12 +93,5 @@ public class TempInferior {
             contenedor *= -1;
         }
         return contenedor;
-    }
-
-    static int pasarPositivo(int resta) {
-        if (resta < 0) {
-            resta *= -1;
-        }
-        return resta;
     }
 }
