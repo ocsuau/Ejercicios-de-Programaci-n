@@ -47,4 +47,43 @@ public class codNorris {
         }
         return numBin;
     }
+
+    //Parte de la decodificación
+
+    static String deNorrisCod(String mensaje) {
+        String[] message = mensaje.split(" ");
+        StringBuilder sb = new StringBuilder();
+        int bitsD = 7;
+        sb.append(crearBinStr(message));
+        return decodMensaje(sb.toString(), bitsD);
+    }
+
+    static String crearBinStr(String[] message) {
+        StringBuilder retorno = new StringBuilder();
+        int num;
+        for (int i = 0; i < message.length; i++) {
+            num = (message[i].length() == 1) ? 1 : 0;
+            i++;
+            retorno.append(addBits(num, message[i]));
+        }
+        return retorno.toString();
+    }
+
+    static String addBits(int num, String message) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < message.length(); i++) {
+            sb.append(num);
+        }
+        return sb.toString();
+    }
+
+    static String decodMensaje(String binario, int bitsD) {
+        String provisional;
+        StringBuilder retorno = new StringBuilder();
+        for (int i = 0; i < binario.length(); i += bitsD) {
+            provisional = binario.substring(i, i + bitsD);
+            retorno.append((char) Integer.parseInt(provisional, 2));
+        }
+        return retorno.toString();
+    }
 }
