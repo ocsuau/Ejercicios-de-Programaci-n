@@ -6,78 +6,32 @@ import java.util.Scanner;
  */
 public class TempInferior {
     static int calcTempInf(String valores, int cantidad) {
-        if (cantidad <= 0) {
+        if (cantidad == 0) {
             return 0;
         }
-        String[] ars = valores.split(" ");
-        int[] valoresenteros = transformarArray(ars, cantidad);
-        return cercanaCero(valoresenteros);
-    }
-
-    static int[] transformarArray(String[] ars, int cantidad) {
-        int contcaracter;
-        int provisional;
-        int nprovi;
-        int[] valoresenteros = new int[cantidad];
-        for (int i = 0; i < ars.length; i++) {
-            contcaracter = comprobarNegativos(ars[i]);
-
-            provisional = comprobarNDigitos(contcaracter);
-
-            for (int j = ars[i].length() - contcaracter; j < ars[i].length(); j++) {
-
-                valoresenteros[i] += calcularValores(ars[i].charAt(j), provisional);
-                provisional /= 10;
+        String[] temps = valores.split(" ");
+        int[] tempi = new int[temps.length];
+        for (int i = 0; i < temps.length; i++) {
+            tempi[i] = Integer.parseInt(temps[i]);
+        }
+        int temp = tempi[0];
+        int provisional1 = Math.abs(temp);
+        boolean b = false;
+        int provisional2;
+        for (int i = 1; i < tempi.length; i++) {
+            provisional2 = Math.abs(tempi[i]);
+            if (provisional2 == provisional1) {
+                b = true;
             }
-            if (contcaracter < ars[i].length()) {
-                valoresenteros[i] *= -1;
+            if (provisional2 < provisional1) {
+                b = false;
+                provisional1 = provisional2;
+                temp = tempi[i];
             }
         }
-        return valoresenteros;
-    }
-
-    static int comprobarNegativos(String valor) {
-        int contcaracter = valor.length();
-        if (valor.startsWith("-")) {
-            contcaracter--;
+        if (b && temp < 0) {
+            temp *= -1;
         }
-        return contcaracter;
-    }
-
-    static int comprobarNDigitos(int contcaracter) {
-        int provisional = 1;
-        if (contcaracter > 1) {
-            provisional *= Math.pow(10, (contcaracter - 1));
-        }
-        return provisional;
-    }
-
-    static int calcularValores(char caracterN, int provisional) {
-        int nprovi = caracterN;
-        nprovi -= 48;
-        return (nprovi *= provisional);
-    }
-
-    static int cercanaCero(int[] valoresenteros) {
-        int contenedor = valoresenteros[0];
-        int resta = Math.abs(0 - contenedor);
-        boolean contador = false;
-        int resta2;
-        for (int i = 1; i < valoresenteros.length; i++) {
-            resta2 = Math.abs(0 - valoresenteros[i]);
-            if (resta2 < resta) {
-                resta = resta2;
-                contenedor = valoresenteros[i];
-                contador = false;
-            } else if (resta2 == resta) {
-                if ((contenedor < 0 && valoresenteros[i] > 0) || (contenedor > 0 && valoresenteros[i] < 0)) {
-                    contador = true;
-                }
-            }
-        }
-        if (contador && contenedor < 0) {
-            contenedor *= -1;
-        }
-        return contenedor;
+        return temp;
     }
 }
