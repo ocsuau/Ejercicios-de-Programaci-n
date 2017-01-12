@@ -20,7 +20,7 @@ public class TempInferior {
         int provisional2;
         for (int i = 1; i < tempi.length; i++) {
             provisional2 = Math.abs(tempi[i]);
-            if (provisional2 == provisional1) {
+            if (provisional2 == provisional1 && (temp > tempi[i] || tempi[i] > temp)) {
                 b = true;
             }
             if (provisional2 < provisional1) {

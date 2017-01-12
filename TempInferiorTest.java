@@ -11,11 +11,13 @@ public class TempInferiorTest {
         String ori1 = "3 -8 123 -643 -2 4";
         String ori2 = "3 1 -4 -1 49 2 45 6 23 5 192";
         String ori3 = "54 29 -14 39 14";
+        String ori4 = "4 -3 9 8 7 -3";
 
         assertEquals(-2, TempInferior.calcTempInf(ori1, 6));
         assertEquals(1, TempInferior.calcTempInf(ori2, 11));
         assertEquals(14, TempInferior.calcTempInf(ori3, 5));
         assertEquals(0, TempInferior.calcTempInf("", 0));
+        assertEquals(-3, TempInferior.calcTempInf(ori4, 6));
     }
 
 }
